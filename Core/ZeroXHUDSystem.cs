@@ -40,10 +40,6 @@ namespace ZeroXHUD.Core
         private bool globalHudVisibility = false;
         private void OnToggleHudPressed()
         {
-            ChatHelper.BroadcastChatMessage(
-                    NetworkText.FromLiteral($"{userInterface?.CurrentState}"),
-                    Color.Green);
-
             globalHudVisibility = !globalHudVisibility;
         }
 

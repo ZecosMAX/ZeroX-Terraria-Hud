@@ -38,12 +38,7 @@ namespace ZeroXHUD.UI
 
                 if (playerPanels.Count != sameTeamPlayers.Count && sameTeamPlayers.Count > 0)
                 {
-                    foreach (UIElement element in Elements)
-                    {
-                        element.Deactivate();
-                        element.Remove();
-                    }
-                    Elements.Clear();
+                    RemoveAllChildren();
 
                     playerPanels = new List<PlayerPanel>();
                     for (int i = 0; i < sameTeamPlayers.Count; i++)
