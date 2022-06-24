@@ -1,0 +1,3 @@
+displayName = ZeroX's HUDs
+author = zerox
+version = 0.2

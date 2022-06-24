@@ -1,0 +1,4 @@
+ZeroX's HUDs is a mod that shows you different kinds of in-game statistics for your party.
+Very useful if you want to feel like healer from good ol' [MMORPG name here].
+
+This mod is still in development, so lots of new differents stats are coming as well as settings for your personal customisation!
