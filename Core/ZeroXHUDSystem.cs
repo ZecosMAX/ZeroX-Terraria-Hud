@@ -11,6 +11,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using ZeroXHUD.Core.Config;
 using ZeroXHUD.UI;
 
 namespace ZeroXHUD.Core
@@ -64,7 +65,14 @@ namespace ZeroXHUD.Core
 
         public override void OnWorldLoad()
         {
-            
+            if(ZeroXModConfig.Instance.ShowCombatPanelByDefault)
+            {
+                globalHudVisibility = true;
+            }
+            else
+            {
+                globalHudVisibility = false;
+            }
         }
 
         private GameTime _lastUpdateUiGameTime;

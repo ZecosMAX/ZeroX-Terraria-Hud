@@ -10,6 +10,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using ZeroXHUD.Core.Config;
 using ZeroXHUD.Utils;
 
 namespace ZeroXHUD.UI
@@ -22,6 +23,7 @@ namespace ZeroXHUD.UI
 
         UIHead playerHead = new UIHead();
         UIText playerName = new UIText("AAAAAA", 1f);
+        UIText playerDeathCooldown = new UIText("AAAAAA", 1f);
 
         UIText label1 = new UIText("AAAAAA", 1f);
         UIText label2 = new UIText("AAAAAA", 1f);
@@ -54,19 +56,6 @@ namespace ZeroXHUD.UI
             int lifeRegen = player.lifeRegen;
             int manaRegen = player.manaRegen;
 
-            float magicDamage = player.GetActualDamageModifier<MagicDamageClass>();
-            float meleeDamage = player.GetActualDamageModifier<MeleeDamageClass>();
-            float rangeDamage = player.GetActualDamageModifier<RangedDamageClass>();
-            float throwDamage = player.GetActualDamageModifier<ThrowingDamageClass>();
-            float summonDamage = player.GetActualDamageModifier<SummonDamageClass>();
-            float genericDamage = player.GetActualDamageModifier<GenericDamageClass>();
-
-            int def = player.statDefense;
-            int dps = player.getDPS();
-
-            float speed = player.moveSpeed;
-            float ap = player.GetArmorPenetration<GenericDamageClass>();
-
             string name = player.name;
 
             healthBar.Value = (float)life / maxLife;
@@ -75,19 +64,24 @@ namespace ZeroXHUD.UI
             manaBar.Value = (float)mana / maxMana;
             manaBar.Text = $"MP: {mana}/{maxMana} ({manaRegen:+#;-#;0})";
 
-            this.label1.SetText($"DEF: {def:0.00}", 0.8f, false);
-            this.label2.SetText($"DPS: {dps:0}", 0.8f, false);
+            healthBar.FillColor = ZeroXModConfig.Instance.CombatPanel.HealthBarColor;
+            manaBar.FillColor = ZeroXModConfig.Instance.CombatPanel.ManaBarColor;
 
-            this.label3.SetText($"Speed: {speed:0.00}", 0.8f, false);
-            this.label4.SetText($"AP: {ap:0.00}", 0.8f, false);
-            
-            this.label5.SetText($"Magic: {magicDamage:0.00}", 0.8f, false);
-            this.label6.SetText($"Melee: {meleeDamage:0.00}", 0.8f, false);
+            this.label1.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label1Stat), 0.8f, false);
+            this.label2.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label2Stat), 0.8f, false);
 
-            this.label7.SetText($"Range: {rangeDamage:0.00}", 0.8f, false);
-            this.label8.SetText($"Summn: {summonDamage:0.00}", 0.8f, false);
+            this.label3.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label3Stat), 0.8f, false);
+            this.label4.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label4Stat), 0.8f, false);
+           
+            this.label5.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label5Stat), 0.8f, false);
+            this.label6.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label6Stat), 0.8f, false);
 
-            playerName.SetText(name);
+            this.label7.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label7Stat), 0.8f, false);
+            this.label8.SetText(player.GetStat(ZeroXModConfig.Instance.CombatPanel.Label8Stat), 0.8f, false);
+
+            playerDeathCooldown.SetText(name);
+
+            playerName.SetText(name + (player.respawnTimer > 0 ? $" [{player.respawnTimer/60.0f:0.0}]" : ""));
             playerHead.PlayerIndex = player.whoAmI;
         }
 

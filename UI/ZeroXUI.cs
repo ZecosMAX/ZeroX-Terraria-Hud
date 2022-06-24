@@ -8,7 +8,9 @@ using Terraria;
 using Terraria.Chat;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.UI;
+using ZeroXHUD.Core.Config;
 
 namespace ZeroXHUD.UI
 {
@@ -61,7 +63,15 @@ namespace ZeroXHUD.UI
                 for (int i = 0; i < playerPanels.Count; i++)
                 {
                     PlayerPanel playerPanel = playerPanels[i];
-                    playerPanel.Top.Set(86 + 50 * level + 72 * i, 0);
+
+                    int Top = ZeroXModConfig.Instance.CombatPanel.VerticalOffset;
+                    if (ZeroXModConfig.Instance.CombatPanel.ShiftWithBuffs)
+                    {
+                        Top  += 50 * level;
+                    }
+
+                    playerPanel.Top.Set(Top + 72 * i, 0);
+                    playerPanel.Left.Set(ZeroXModConfig.Instance.CombatPanel.HorizontalOffset, 0);
                 }
             } 
             catch (Exception ex)
@@ -77,11 +87,9 @@ namespace ZeroXHUD.UI
         {
             for (int i = 0; i < playerPanels.Count; i++)
             {
+                
                 PlayerPanel playerPanel = playerPanels[i];
-                playerPanel.HAlign = 0.018f;
-                //playerPanel.Top.Set(200 + 70 * i, 0);
                 playerPanel.Activate();
-
                 Append(playerPanel);
             }
         }

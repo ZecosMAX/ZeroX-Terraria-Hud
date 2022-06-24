@@ -1,4 +1,35 @@
-ZeroX's HUDs is a mod that shows you different kinds of in-game statistics for your party.
+This is a mod that shows you different kinds of in-game statistics for your party.
 Very useful if you want to feel like healer from good ol' [MMORPG name here].
 
 This mod is still in development, so lots of new differents stats are coming as well as settings for your personal customisation!
+
+Github page: https://github.com/ZecosMAX/ZeroX-Terraria-Hud
+Current version: v0.2.2
+
+As for available stats
+Red bar is showing your current health and regen.
+Blue bar is showing your current mana and regen.
+
+DEF - defence
+DPS - damage per second.
+AP - Armor piercing
+Speed - speed multiplier, affected by buffs and de-buffs.
+Magic/Melee/Range/Summon - Damage total multiplier, both additive and multiplicative in one number
+
+Changelog:
+[b]v0.2[/b]
+[list]
+	[*] Added basic functionality for bars, labels and avatar.
+[/list]
+
+[b]v0.2.1[/b]
+[list]
+	[*] Fixed errors with redrawing combat panes whenever new player joins party.
+[/list]
+
+[b]v0.2.2[/b]
+[list]
+	[*] Added configs to whole HUD, every label for stat and bars' color.
+	[*] Added respawn cooldown
+[/list]
+
