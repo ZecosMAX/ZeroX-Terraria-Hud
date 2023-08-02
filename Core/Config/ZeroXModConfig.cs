@@ -30,6 +30,7 @@ namespace ZeroXHUD.Core.Config
 
         [Label("Show game status panel")]
         [Tooltip("If tunred off, game's native hud for health and mana will NOT be visible")]
+        [ReloadRequired]
         [DefaultValue(true)]
         public bool ShowGameStatusPanel { get; set; } = true;
 

@@ -4,7 +4,7 @@ Very useful if you want to feel like healer from good ol' [MMORPG name here].
 This mod is still in development, so lots of new differents stats are coming as well as settings for your personal customisation!
 
 Github page: https://github.com/ZecosMAX/ZeroX-Terraria-Hud
-Current version: v0.2.2
+Current version: v0.2.3.1
 
 As for available stats
 Red bar is showing your current health and regen.
@@ -38,4 +38,10 @@ Changelog:
 	[*] Updated for 1.4.4.9 and tModLoader v2023.6.25.27
 	[*] A lot of code refactoring
 	[*] A ability to remove vanilla resource (like HP and MP) bars. (This feature is still in development, and it removes drawing of buffs, so dont use it yet)
+[/list]
+
+[b]v0.2.3.1[/b]
+[list]
+	[*] Reworked removal of HP and MP bars
+	[*] Accesories information can now change position (with removal of bars and preparing for future customization)
 [/list]

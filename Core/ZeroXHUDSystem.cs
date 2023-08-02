@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Chat;
+using Terraria.GameContent.UI.ResourceSets;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -58,6 +60,12 @@ namespace ZeroXHUD.Core
             });
 
             IL_Main.UpdateMinimapAnchors += Hook_IL_Main_UpdateMinimapAnchors;
+            IL_Main.GetInfoAccIconPosition += IL_Main_GetInfoAccIconPosition;
+
+            IL_HorizontalBarsPlayerResourcesDisplaySet.Draw += Hook_IL_HorizontalBarsPlayerResourcesDisplaySet_Draw;
+            IL_FancyClassicPlayerResourcesDisplaySet.Draw += Hook_IL_HorizontalBarsPlayerResourcesDisplaySet_Draw;
+            IL_ClassicPlayerResourcesDisplaySet.Draw += Hook_IL_HorizontalBarsPlayerResourcesDisplaySet_Draw;
+
 
             if (!Main.dedServ)
             {
@@ -66,6 +74,41 @@ namespace ZeroXHUD.Core
 
                 UI.Activate();
             }
+        }
+
+        private static int _YNegativeOffset;
+        private void IL_Main_GetInfoAccIconPosition(ILContext il)
+        {
+            var c = new ILCursor(il);
+            c.GotoNext(i => i.Match(OpCodes.Ret));
+
+            // Place Y onto stack to store
+            c.Emit(OpCodes.Ldarg_3);
+
+            // Place Y onto stack to calculate
+            c.Emit(OpCodes.Ldarg_3);
+
+            // Indicate that value in field is i4
+            c.Emit(OpCodes.Ldind_I4);
+            c.Emit(OpCodes.Ldsfld, Utils.Utils.GetFieldInfo<ZeroXHUDSystem>(nameof(_YNegativeOffset)));
+
+            // subtract Y - _YNegativeOffset
+            c.Emit(OpCodes.Sub);
+
+            // store value in stack in Y
+            c.Emit(OpCodes.Stind_I4);
+        }
+
+        private void Hook_IL_HorizontalBarsPlayerResourcesDisplaySet_Draw(ILContext il)
+        {
+            if (ZeroXModConfig.Instance.ShowGameStatusPanel) return;
+
+
+            var c = new ILCursor(il);
+            c.GotoNext(i => i.Match(OpCodes.Ldarg_0));
+
+            // TODO: Create if statement for dynamic tweaking.
+            c.Emit(OpCodes.Ret);
         }
 
         private static int __minimapX;
@@ -132,9 +175,6 @@ namespace ZeroXHUD.Core
                         }
                         return true;
                     }, InterfaceScaleType.UI));
-
-                if(!ZeroXModConfig.Instance.ShowGameStatusPanel)
-                    layers.RemoveAll(x => x.Name == "Vanilla: Resource Bars");
             }
 
             
@@ -149,14 +189,17 @@ namespace ZeroXHUD.Core
             {
                 __minimapX = 52 + (int)(240.0 * Main.MapScale);
                 __minimapY = 90;
+
+                _YNegativeOffset = 0;
             }
             else
             {
                 __minimapX = 32 + (int)(240.0 * Main.MapScale);
                 __minimapY = 32;
+
+                _YNegativeOffset = 58;
             }
 
-            //Main.UpdateMinimapAnchors();
         }
 
         public override void PostUpdatePlayers()
