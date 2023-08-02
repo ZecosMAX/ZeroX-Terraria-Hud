@@ -33,8 +33,9 @@ Changelog:
 	[*] Added respawn cooldown
 [/list]
 
-[b]v0.2.3[/b]
+[b]v0.2.3.0-pre[/b]
 [list]
 	[*] Updated for 1.4.4.9 and tModLoader v2023.6.25.27
 	[*] A lot of code refactoring
+	[*] A ability to remove vanilla resource (like HP and MP) bars. (This feature is still in development, and it removes drawing of buffs, so dont use it yet)
 [/list]

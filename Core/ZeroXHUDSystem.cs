@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoMod.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
@@ -55,7 +57,7 @@ namespace ZeroXHUD.Core
                 Action = OnToggleHudPressed 
             });
 
-            
+            IL_Main.UpdateMinimapAnchors += Hook_IL_Main_UpdateMinimapAnchors;
 
             if (!Main.dedServ)
             {
@@ -64,6 +66,30 @@ namespace ZeroXHUD.Core
 
                 UI.Activate();
             }
+        }
+
+        private static int __minimapX;
+        private static int __minimapY;
+        private void Hook_IL_Main_UpdateMinimapAnchors(MonoMod.Cil.ILContext il)
+        {
+            var c = new ILCursor(il);
+            c.GotoNext(i => i.MatchRet());
+
+            //c.Index--; // ?
+
+            var anchorLeft = typeof(Main).GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.Name == "_minimapTopRightAnchorOffsetTowardsLeft");
+            var anchorBottom = typeof(Main).GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.Name == "_minimapTopRightAnchorOffsetTowardsBottom");
+
+            var mxf = typeof(ZeroXHUDSystem).GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.Name == "__minimapX");
+            var myf = typeof(ZeroXHUDSystem).GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.Name == "__minimapY");
+
+            if (anchorLeft == null || anchorBottom == null) return;
+
+            c.EmitDelegate<Action>(() =>
+            {
+                anchorLeft.SetValue(null, __minimapX);
+                anchorBottom.SetValue(null, __minimapY);
+            });
         }
 
         public override void OnWorldLoad()
@@ -90,13 +116,14 @@ namespace ZeroXHUD.Core
 
             lastUpdateUiGameTime = gameTime;
         }
+
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             var mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if (mouseTextIndex != -1)
             {
                 layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
-                    "MyMod: MyInterface",
+                    "ZeroxHud: Interface",
                     delegate
                     {
                         if (lastUpdateUiGameTime != null && userInterface?.CurrentState != null)
@@ -105,7 +132,31 @@ namespace ZeroXHUD.Core
                         }
                         return true;
                     }, InterfaceScaleType.UI));
+
+                if(!ZeroXModConfig.Instance.ShowGameStatusPanel)
+                    layers.RemoveAll(x => x.Name == "Vanilla: Resource Bars");
             }
+
+            
+        }
+
+        public override void PreUpdatePlayers()
+        {
+            Main.miniMapX = 0;
+            Main.miniMapY = 0;
+
+            if (ZeroXModConfig.Instance.ShowGameStatusPanel)
+            {
+                __minimapX = 52 + (int)(240.0 * Main.MapScale);
+                __minimapY = 90;
+            }
+            else
+            {
+                __minimapX = 32 + (int)(240.0 * Main.MapScale);
+                __minimapY = 32;
+            }
+
+            //Main.UpdateMinimapAnchors();
         }
 
         public override void PostUpdatePlayers()
