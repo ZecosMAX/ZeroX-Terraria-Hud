@@ -12,8 +12,6 @@ namespace ZeroXHUD
         public static ZeroXHUDSystem ModSystemInstance { get; set; }
         public static ZeroXPlayer ModPlayerInstance { get; set; }
 
-        //public static ZeroXModConfig ModConfig { get => ModSystemInstance.Mod.GetConfig()}
-
         public static void InitializeModSystem(ZeroXHUDSystem modSystem)
         {
             ModSystemInstance = modSystem;

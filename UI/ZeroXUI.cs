@@ -56,7 +56,7 @@ namespace ZeroXHUD.UI
                     Player sameTeamPlayer = sameTeamPlayers[i];
                     PlayerPanel playerPanel = playerPanels[i];
 
-                    playerPanel.UpdateValues(sameTeamPlayer);
+                    playerPanel.UpdateValues();
                 }
 
                 int level = (player.CountBuffs() + 10) / 11;
@@ -85,10 +85,8 @@ namespace ZeroXHUD.UI
 
         private void InitializePanels()
         {
-            for (int i = 0; i < playerPanels.Count; i++)
+            foreach (PlayerPanel playerPanel in playerPanels)
             {
-                
-                PlayerPanel playerPanel = playerPanels[i];
                 playerPanel.Activate();
                 Append(playerPanel);
             }

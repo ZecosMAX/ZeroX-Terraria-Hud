@@ -1,0 +1,113 @@
+"Keybinds.Toggle HUD.DisplayName": Toggle  H U D
+
+Configs: {
+	ZeroXModConfig: {
+		DisplayName: Zero X Mod Config
+
+		ShowCombatPanelByDefault: {
+			Label: Show combat panel by default
+			Tooltip: If tunred on, hud will be visible as soon as you start the game
+		}
+
+		CombatPanel: {
+			Label: Combat panel
+			Tooltip: Combat panel settings
+		}
+
+		ShowGameStatusPanel: {
+			Label: Show game status panel
+			Tooltip: If tunred off, game's native hud for health and mana will NOT be visible
+		}
+	}
+
+	CombatPanelConfig: {
+		Tooltip: ""
+
+		Headers: {
+			Position: Position Header
+			Bars: Bars Header
+			Labels: Labels Header
+		}
+
+		VerticalOffset: {
+			Label: Vertical offset
+			Tooltip: Vertical offset from the top-right corner of the screen in pixels
+		}
+
+		HorizontalOffset: {
+			Label: Horizontal offset
+			Tooltip: Horizontal offset from the top-right corner of the screen in pixels
+		}
+
+		ShiftWithBuffs: {
+			Label: Shift with buffs
+			Tooltip: If enabled, combat panel will shift downwards for each new row of buffs
+		}
+
+		HealthBarColor: {
+			Label: Health bar color
+			Tooltip: ""
+		}
+
+		ManaBarColor: {
+			Label: Mana bar color
+			Tooltip: ""
+		}
+
+		Label1Stat: {
+			Label: 1st label stat
+			Tooltip: ""
+		}
+
+		Label2Stat: {
+			Label: 2nd label stat
+			Tooltip: ""
+		}
+
+		Label3Stat: {
+			Label: 3rd label stat
+			Tooltip: ""
+		}
+
+		Label4Stat: {
+			Label: 4th label stat
+			Tooltip: ""
+		}
+
+		Label5Stat: {
+			Label: 5th label stat
+			Tooltip: ""
+		}
+
+		Label6Stat: {
+			Label: 6th label stat
+			Tooltip: ""
+		}
+
+		Label7Stat: {
+			Label: 7th label stat
+			Tooltip: ""
+		}
+
+		Label8Stat: {
+			Label: 8th label stat
+			Tooltip: ""
+		}
+	}
+
+	LabelStatTypes: {
+		Tooltip: ""
+		None.Label: None
+		Defense.Label: Defense
+		DPS.Label: Damage per second
+		ArmorPiercing.Label: Armor piercing
+		Speed.Label: Speed multiplier
+		Slow.Label: Slowness multiplier
+		MagicDamageMultiplier.Label: Magic damage multiplier
+		MeleeDamageMultiplier.Label: Melee damage multiplier
+		RangedDamageMultiplier.Label: Ranged damage multiplier
+		SummonDamageMultiplier.Label: Summon damage multiplier
+		ThrowingDamageMultiplier.Label: Throwing damage multiplier
+		GenericDamageMultiplier.Label: Generic damage multiplier
+	}
+}

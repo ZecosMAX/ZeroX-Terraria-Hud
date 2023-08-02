@@ -28,21 +28,14 @@ namespace ZeroXHUD.Core.Config
         [Tooltip("Combat panel settings")]
         public CombatPanelConfig CombatPanel { get; set; } = new CombatPanelConfig();
 
+        [Label("Show game status panel")]
+        [Tooltip("If tunred off, game's native hud for health and mana will NOT be visible")]
+        [DefaultValue(true)]
+        public bool ShowGameStatusPanel { get; set; } = true;
+
         public ZeroXModConfig()
         {
-            if(Instance == null)
-                Instance = this;
-
-            try
-            {
-                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral($"Config constructor called!"), Color.White);
-            }
-            catch
-            {
-
-            }
+            Instance ??= this;
         }
-
-        //override 
 	}
 }

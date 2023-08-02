@@ -22,19 +22,9 @@ namespace ZeroXHUD.Core
         {
             var keybinds = ZeroXHUD.ModSystemInstance.Keybinds;
 
-            foreach (KeyValuePair<string, (ModKeybind, Action)> keybind in keybinds)
+            foreach (var keybind in keybinds)
             {
-                if (keybind.Value.Item1.JustPressed)
-                {
-                    try
-                    {
-                        keybind.Value.Item2?.Invoke();
-                    }
-                    catch
-                    {
-
-                    }
-                }
+                keybind.Value.InvokeAction();
             }
         }
     }

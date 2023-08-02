@@ -17,22 +17,22 @@ namespace ZeroXHUD.UI
 {
     internal class PlayerPanel : UIElement
     {
-        Player player;
-        Bar healthBar = new Bar();
-        Bar manaBar = new Bar();
+        private Player player;
+        private Bar healthBar = new();
+        private Bar manaBar = new();
 
-        UIHead playerHead = new UIHead();
-        UIText playerName = new UIText("AAAAAA", 1f);
-        UIText playerDeathCooldown = new UIText("AAAAAA", 1f);
+        private UIHead playerHead = new();
+        private UIText playerName = new("", 1f);
+        private UIText playerDeathCooldown = new("", 1f);
 
-        UIText label1 = new UIText("AAAAAA", 1f);
-        UIText label2 = new UIText("AAAAAA", 1f);
-        UIText label3 = new UIText("AAAAAA", 1f);
-        UIText label4 = new UIText("AAAAAA", 1f);
-        UIText label5 = new UIText("AAAAAA", 1f);
-        UIText label6 = new UIText("AAAAAA", 1f);
-        UIText label7 = new UIText("AAAAAA", 1f);
-        UIText label8 = new UIText("AAAAAA", 1f);
+        private UIText label1 = new("", 1f);
+        private UIText label2 = new("", 1f);
+        private UIText label3 = new("", 1f);
+        private UIText label4 = new("", 1f);
+        private UIText label5 = new("", 1f);
+        private UIText label6 = new("", 1f);
+        private UIText label7 = new("", 1f);
+        private UIText label8 = new("", 1f);
 
 
         public PlayerPanel(Player player)
@@ -43,10 +43,8 @@ namespace ZeroXHUD.UI
             this.MinWidth.Set(200, 0);
         }
 
-        public void UpdateValues(Player player)
+        public void UpdateValues()
         {
-            this.player = player;
-
             int life    = player.statLife;
             int maxLife = player.statLifeMax2;
 

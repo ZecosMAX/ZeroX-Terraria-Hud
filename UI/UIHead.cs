@@ -19,10 +19,7 @@ namespace ZeroXHUD.UI
 {
     public class UIHead : UIElement
     {
-        Color color = new Color(255, 255, 255);
         public int PlayerIndex { get; set; } = 0;
-
-        public bool isRendered;
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -35,8 +32,7 @@ namespace ZeroXHUD.UI
                 var position = dimensions.Position();
                 position -= new Vector2(crossAsset.Width() / 6, crossAsset.Height() / 3);
 
-                spriteBatch.Draw(crossAsset.Value, position, null, color, 0.0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0);
-                //spriteBatch.Draw(crossAsset.Value, dimensions.Position(), color);
+                spriteBatch.Draw(crossAsset.Value, position, null, Color.White, 0.0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0);
             }
             else if (Main.player[PlayerIndex].invis)
             {

@@ -18,10 +18,10 @@ namespace ZeroXHUD.Core
 {
     public class ZeroXHUDSystem : ModSystem
     {
-        private UserInterface userInterface;
-        private ZeroXUI UI;
+        private UserInterface? userInterface;
+        private ZeroXUI? UI;
 
-        public Dictionary<string, (ModKeybind, Action)> Keybinds { get; set; } = new();
+        public Dictionary<string, KeybindAction> Keybinds { get; set; } = new();
 
         public ZeroXHUDSystem()
         {
@@ -46,11 +46,14 @@ namespace ZeroXHUD.Core
 
         public override void OnModLoad()
         {
-            this.Mod.Logger.Debug($"HUDSystem OnModLoad fired with Mod: {Mod.DisplayName}");
+            Mod.Logger.Debug($"HUDSystem OnModLoad fired with Mod: {Mod.DisplayName}");
 
             var bind = KeybindLoader.RegisterKeybind(Mod, "Toggle HUD", Microsoft.Xna.Framework.Input.Keys.OemTilde);
 
-            Keybinds.Add("toggle_hud", (bind, OnToggleHudPressed));
+            Keybinds.Add("toggle_hud", new() {
+                Keybind = bind, 
+                Action = OnToggleHudPressed 
+            });
 
             
 
@@ -75,32 +78,33 @@ namespace ZeroXHUD.Core
             }
         }
 
-        private GameTime _lastUpdateUiGameTime;
+        private GameTime lastUpdateUiGameTime;
         public override void UpdateUI(GameTime gameTime)
         {
-            if(userInterface?.CurrentState != null)
+            if (userInterface == null) return;
+
+            if(userInterface.CurrentState != null)
             {
                 userInterface.Update(gameTime);
             }
 
-            _lastUpdateUiGameTime = gameTime;
+            lastUpdateUiGameTime = gameTime;
         }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            var mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if (mouseTextIndex != -1)
             {
                 layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
                     "MyMod: MyInterface",
                     delegate
                     {
-                        if (_lastUpdateUiGameTime != null && userInterface?.CurrentState != null)
+                        if (lastUpdateUiGameTime != null && userInterface?.CurrentState != null)
                         {
-                            userInterface.Draw(Main.spriteBatch, _lastUpdateUiGameTime);
+                            userInterface.Draw(Main.spriteBatch, lastUpdateUiGameTime);
                         }
                         return true;
-                    },
-                       InterfaceScaleType.UI));
+                    }, InterfaceScaleType.UI));
             }
         }
 
@@ -119,10 +123,7 @@ namespace ZeroXHUD.Core
 
                 if (userInterface?.CurrentState != null)
                 {
-                    if (UI != null)
-                    {
-                        UI.Refresh();
-                    }
+                    UI?.Refresh();
                 }
                 else
                 {
