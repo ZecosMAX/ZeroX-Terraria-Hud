@@ -27,6 +27,7 @@ Configs: {
 			Position: Position Header
 			Bars: Bars Header
 			Labels: Labels Header
+			Behaviour: Behaviour Header
 		}
 
 		VerticalOffset: {
@@ -92,6 +93,11 @@ Configs: {
 		Label8Stat: {
 			Label: 8th label stat
 			Tooltip: ""
+		}
+
+		ExcludeLocalPlayer: {
+			Label: Exclude yourself
+			Tooltip: If turned on, your own player wouldn't show in list of players in party
 		}
 	}
 

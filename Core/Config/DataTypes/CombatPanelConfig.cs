@@ -11,15 +11,23 @@ namespace ZeroXHUD.Core.Config.DataTypes
 {
     public class CombatPanelConfig
     {
+        [Header("Behaviour")]
+        [Label("Exclude yourself")]
+        [Tooltip("If turned on, your own player wouldn't show in list of players in party")]
+        [DefaultValue(false)]
+        public bool ExcludeLocalPlayer { get; set; }
+
 
         [Header("Position")]
         [Label("Vertical offset")]
-        [Tooltip("Vertical offset from the top-right corner of the screen in pixels")]
+        [Tooltip("Vertical offset from the top-left corner of the screen in pixels")]
+        [Range(-10000, 10000)]
         [DefaultValue(86)]
         public int VerticalOffset { get; set; } = 86;
 
         [Label("Horizontal offset")]
-        [Tooltip("Horizontal offset from the top-right corner of the screen in pixels")]
+        [Tooltip("Horizontal offset from the top-left corner of the screen in pixels")]
+        [Range(-10000, 10000)]
         [DefaultValue(35)]
         public int HorizontalOffset { get; set; } = 35;
 

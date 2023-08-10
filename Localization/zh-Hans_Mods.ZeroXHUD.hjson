@@ -27,6 +27,7 @@ Configs: {
 			Position: 位置标题
 			Bars: 条标题
 			Labels: 标签标题
+			// Behaviour: Behaviour Header
 		}
 
 		VerticalOffset: {
@@ -92,6 +93,11 @@ Configs: {
 		Label8Stat: {
 			Label: 第8标签状态
 			Tooltip: ""
+		}
+
+		ExcludeLocalPlayer: {
+			// Label: Exclude yourself
+			// Tooltip: If turned on, your own player wouldn't show in list of players in party
 		}
 	}
 

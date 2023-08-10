@@ -23,12 +23,19 @@ namespace ZeroXHUD.UI
             try
             {
                 var player = Main.LocalPlayer;
-                List<Player> sameTeamPlayers = null;
+                List<Player> displayedPlayers = null;
                 lock (Main.player)
                 {
                     try
                     {
-                        sameTeamPlayers = Main.player.Where(p => p.team == player.team && p.active).ToList();
+                        var sameTeamPlayers = Main.player.Where(p => p.team == player.team && p.active);
+
+                        if(ZeroXModConfig.Instance.CombatPanel.ExcludeLocalPlayer)
+                        {
+                            sameTeamPlayers = sameTeamPlayers.Where(p => p != Main.LocalPlayer);
+                        }
+
+                        displayedPlayers = sameTeamPlayers.ToList();
                     }
                     catch
                     {
@@ -36,24 +43,24 @@ namespace ZeroXHUD.UI
                     }
                 }
 
-                if (sameTeamPlayers == null) return;
+                if (displayedPlayers == null) return;
 
-                if (playerPanels.Count != sameTeamPlayers.Count && sameTeamPlayers.Count > 0)
+                if (playerPanels.Count != displayedPlayers.Count)
                 {
                     RemoveAllChildren();
 
                     playerPanels = new List<PlayerPanel>();
-                    for (int i = 0; i < sameTeamPlayers.Count; i++)
+                    for (int i = 0; i < displayedPlayers.Count; i++)
                     {
-                        playerPanels.Add(new PlayerPanel(sameTeamPlayers[i]));
+                        playerPanels.Add(new PlayerPanel(displayedPlayers[i]));
                     }
 
                     InitializePanels();
                 }
 
-                for (int i = 0; i < sameTeamPlayers.Count; i++)
+                for (int i = 0; i < displayedPlayers.Count; i++)
                 {
-                    Player sameTeamPlayer = sameTeamPlayers[i];
+                    Player sameTeamPlayer = displayedPlayers[i];
                     PlayerPanel playerPanel = playerPanels[i];
 
                     playerPanel.UpdateValues();
