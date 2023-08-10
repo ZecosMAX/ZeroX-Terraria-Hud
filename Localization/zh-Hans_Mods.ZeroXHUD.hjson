@@ -1,0 +1,113 @@
+"Keybinds.Toggle HUD.DisplayName": 切换 HUD
+
+Configs: {
+	ZeroXModConfig: {
+		DisplayName: Zero X 配置
+
+		ShowCombatPanelByDefault: {
+			Label: 默认显示战斗面板
+			Tooltip: 如果打开，游戏启动时将默认显示 HUD
+		}
+
+		CombatPanel: {
+			Label: 战斗面板
+			Tooltip: 战斗面板设置
+		}
+
+		ShowGameStatusPanel: {
+			Label: 显示游戏状态面板
+			Tooltip: 如果关闭，游戏的原生生命值和魔法值 HUD 将不会显示
+		}
+	}
+
+	CombatPanelConfig: {
+		Tooltip: ""
+
+		Headers: {
+			Position: 位置标题
+			Bars: 条标题
+			Labels: 标签标题
+		}
+
+		VerticalOffset: {
+			Label: 垂直偏移
+			Tooltip: 从屏幕右上角以像素为单位的垂直偏移
+		}
+
+		HorizontalOffset: {
+			Label: 水平偏移
+			Tooltip: 从屏幕右上角以像素为单位的水平偏移
+		}
+
+		ShiftWithBuffs: {
+			Label: 随buffs移动
+			Tooltip: 如果启用，每增加一行buffs，战斗面板就会向下偏移
+		}
+
+		HealthBarColor: {
+			Label: 生命条颜色
+			Tooltip: ""
+		}
+
+		ManaBarColor: {
+			Label: 魔力条颜色
+			Tooltip: ""
+		}
+
+		Label1Stat: {
+			Label: 第1标签状态
+			Tooltip: ""
+		}
+
+		Label2Stat: {
+			Label: 第2标签状态
+			Tooltip: ""
+		}
+
+		Label3Stat: {
+			Label: 第3标签状态
+			Tooltip: ""
+		}
+
+		Label4Stat: {
+			Label: 第4标签状态
+			Tooltip: ""
+		}
+
+		Label5Stat: {
+			Label: 第5标签状态
+			Tooltip: ""
+		}
+
+		Label6Stat: {
+			Label: 第6标签状态
+			Tooltip: ""
+		}
+
+		Label7Stat: {
+			Label: 第7标签状态
+			Tooltip: ""
+		}
+
+		Label8Stat: {
+			Label: 第8标签状态
+			Tooltip: ""
+		}
+	}
+
+	LabelStatTypes: {
+		Tooltip: ""
+		None.Label: 无
+		Defense.Label: 防御
+		DPS.Label: 每秒伤害
+		ArmorPiercing.Label: 盔甲穿透
+		Speed.Label: 速度乘数
+		Slow.Label: 缓慢乘数
+		MagicDamageMultiplier.Label: 魔法伤害乘数
+		MeleeDamageMultiplier.Label: 近战伤害乘数
+		RangedDamageMultiplier.Label: 远程伤害乘数
+		SummonDamageMultiplier.Label: 召唤伤害乘数
+		ThrowingDamageMultiplier.Label: 投掷伤害乘数
+		GenericDamageMultiplier.Label: 通用伤害乘数
+	}
+}
