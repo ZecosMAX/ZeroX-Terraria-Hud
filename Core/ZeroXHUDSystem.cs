@@ -16,6 +16,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using ZeroXHUD.Core.Config;
+using ZeroXHUD.Core.Networking;
 using ZeroXHUD.UI;
 
 namespace ZeroXHUD.Core
@@ -225,6 +226,18 @@ namespace ZeroXHUD.Core
                 }
             }
             catch(Exception ex)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral($"{ex}"), Color.White);
+            }
+
+            try
+            {
+                var dpsPacket = new DPSDamagePacketBulder();
+                dpsPacket.Player = Main.LocalPlayer;
+
+                dpsPacket.SendPacket();
+            }
+            catch (Exception ex)
             {
                 ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral($"{ex}"), Color.White);
             }

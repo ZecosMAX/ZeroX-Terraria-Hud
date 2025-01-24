@@ -1,3 +1,4 @@
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -11,6 +12,7 @@ namespace ZeroXHUD
     {
         public static ZeroXHUDSystem ModSystemInstance { get; set; }
         public static ZeroXPlayer ModPlayerInstance { get; set; }
+        public static ZeroXHUD Instance { get; set; }
 
         public static void InitializeModSystem(ZeroXHUDSystem modSystem)
         {
@@ -24,6 +26,12 @@ namespace ZeroXHUD
 
         public ZeroXHUD()
         {
-        }    
+            Instance = this;
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            base.HandlePacket(reader, whoAmI);
+        }
     }
 }
